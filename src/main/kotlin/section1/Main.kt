@@ -1,4 +1,4 @@
-package org.example
+package org.example.section1
 
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.launch
