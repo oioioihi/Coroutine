@@ -18,7 +18,8 @@ fun main() {
         }
 
         // join함수를 사용하면 join 함수의 대상이 된 코루틴이 완료될 때까지 join 함수를 호출한 코루틴이 일시 중단된다.
-        updateTokenJob.join() // 2.networkCallJob 실행 전 updateTokenJob 완료 될때 까지 기다림
+        updateTokenJob.join() // 2.networkCallJob 실행 전 updateTokenJob 완료 될때 까지 기다림 -> joinAll(updateTokenJob)
+
 
         val networkCallJob = launch(Dispatchers.IO) { // 3. 메인스레드가 Dispatchers.IO에 networkCallJob 코루틴 실행 요청
             println("[${Thread.currentThread().name}] 네트워크 요청")
