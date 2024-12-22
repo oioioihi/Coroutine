@@ -11,33 +11,50 @@ import kotlinx.coroutines.*
  */
 
 
-fun main() = runBlocking<Unit> {
+fun main() {
+    runBlocking<Unit> {
 
-    launch(Dispatchers.IO) { // 부모 코루틴
+        launch(Dispatchers.IO) { // 부모 코루틴
 
-        launch { // 부모 코루틴의 디스패처(Dispathcers.IO)를 사용해 실행되는 코루틴들
-            println("[${Thread.currentThread().name}] 작업1 실행")
+            launch { // 부모 코루틴의 디스패처(Dispathcers.IO)를 사용해 실행되는 코루틴들
+                println("[${Thread.currentThread().name}] 작업1 실행")
+            }
+
+            launch {
+                println("[${Thread.currentThread().name}] 작업2 실행")
+            }
+
+            launch {
+                println("[${Thread.currentThread().name}] 작업3 실행")
+            }
         }
 
-        launch {
-            println("[${Thread.currentThread().name}] 작업2 실행")
+        launch(Dispatchers.Default) {
+            launch {
+                println("[${Thread.currentThread().name}] 작업4 실행")
+            }
+
+            launch {
+                println("[${Thread.currentThread().name}] 작업5 실행")
+            }
+            launch {
+                println("[${Thread.currentThread().name}] 작업6 실행")
+            }
         }
 
-        launch {
-            println("[${Thread.currentThread().name}] 작업3 실행")
-        }
-    }
 
-    launch(Dispatchers.Default) {
-        launch {
-            println("[${Thread.currentThread().name}] 작업4 실행")
+        /**
+         * 코루틴에서 특정 작업의 병렬 실행 개수를 제한할 때 사용하는 기능
+         * 병렬로 실행되는 코루틴의 최대 개수를 제한하여 시스템 리소스를 효율적으로 관리할 수 있음.
+         */
+
+        val limitedParallelism = Dispatchers.Default.limitedParallelism(2)
+                repeat(100){
+            launch(limitedParallelism) {
+                Thread.sleep(100L)
+                println("[${Thread.currentThread().name}] 이미지 처리 작업 실행")
+            }
         }
 
-        launch {
-            println("[${Thread.currentThread().name}] 작업5 실행")
-        }
-        launch {
-            println("[${Thread.currentThread().name}] 작업6 실행")
-        }
     }
 }
