@@ -23,4 +23,10 @@ fun main() = runBlocking<Unit> {
     launch(context = coroutineContext2) {
         println("[${Thread.currentThread().name}] 실행")
     }
+    val coroutineName =
+        coroutineContext1[CoroutineName.Key] // CoroutineContext의 구성요소에 접근하기 위해서는 get함수의 인자로 key를 넘기면 된다.
+    println("코루틴 이름: ${coroutineName}")
+
+    val deletedCoroutineContext = coroutineContext1.minusKey(CoroutineName) // 구성요소가 제거된 새로운 CoroutineContext 객체가 반환된다.
+    println(deletedCoroutineContext)
 }
