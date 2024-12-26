@@ -28,6 +28,7 @@ fun main() = runBlocking {
     }
 
     // withContext는 같은 코루틴이 유지된 상태에서 실행하는 스레드만 바뀌기 때문에 순차 처리된다.
+    // 코루틴들이 병렬로 실행되야 할 때는 withContext함수를 사용하면 안되고 async를 사용해야한다.
     val results = listOf(result1, result2)
     println("합쳐진 결과값: ${results.joinToString(", ")}")
 
