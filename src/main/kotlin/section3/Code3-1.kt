@@ -1,6 +1,9 @@
-package section2
+package section3
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * 코루틴에서 순차 처리가 필요한 이유

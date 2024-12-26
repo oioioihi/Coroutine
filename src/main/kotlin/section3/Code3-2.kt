@@ -1,6 +1,8 @@
-package section2
+package section3
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * CoroutineStart.LAZY
